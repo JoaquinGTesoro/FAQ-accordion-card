@@ -24,11 +24,7 @@ body {
      hsl(273, 75%, 66%),
      hsl(240, 73%, 65%)
     );
-    height: 100vh;
-    width: 100%;
     background-repeat: no-repeat;
-    justify-content: center;
-    align-items: center;
     font-size: 75%;
     font-family: "Kumbh Sans";
 
@@ -38,6 +34,19 @@ body {
             hsl(240, 73%, 65%)
         );
     }
+}
+
+main {
+    height: 100vh;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
 
 img {
@@ -86,6 +95,7 @@ p {
 .container {
     width: 90%;
     height: 75%;
+    max-height: calc(40em);
     margin-top: 20%;
     padding-bottom: 2.5em;
     background-color: white;
@@ -94,10 +104,14 @@ p {
     overflow: auto;
     flex-direction: column;
 
+    @media(min-width: 650px) {
+        margin-top: 10%;
+    }
+
     @media(min-width: 900px) {
         flex-direction: row;
         width: 70%;
-        height: 55%;
+        height: 65%;
         margin-top: 0;
         border-radius: 20px;
         padding: 0;
@@ -111,11 +125,21 @@ p {
     left: 50%;
     transform: translate(-50%, -50%);
 
+    @media(min-width: 650px) {
+        transform: translate(-40%, -50%);
+    }
+
     @media(min-width: 900px) {
+        width: 80%;
         position: relative;
         left: 0;
         top: 50%;
         transform: translate(0, -50%);
+    }
+
+    @media(min-width: 1100px) {
+        width: 100%;
+        transform: translate(0, -50%) scale(0.9);
     }
 }
 
@@ -125,11 +149,18 @@ p {
     align-items: center;
 
     @media(min-width: 900px) {
+        width: 120%;
         align-items: flex-start;
         // justify-content: center;
-        margin: 0 10em;
+        margin: 5em 3em 5em 3em;
         position: relative;
-        padding-top: 10%;
+        display: grid;
+        place-items: center;
+    }
+
+    @media(min-width: 1100px) {
+        margin: 5em 6em; 
+        width: 100%;
     }
 }
 
@@ -196,21 +227,52 @@ p {
     z-index: 99;
 
     @media(min-width: 900px) {
-        display: inline;
+        display: block;
         width: auto;
         position: absolute;
         top: 50%;
-        left: 8.5%;
-        transform: translate(0, -25%);
-        transition: left .3s;
+        left: 50%;
+        transform: translate(-215%, -40%);
+        transition: margin-left .3s;
     }
+
+    @media(min-width: 1000px) {
+        transform: translate(-230%, -35%);
+    }
+    
+    @media(min-width: 1100px) {
+        transform: translate(-250%, -30%);
+    }
+
+    @media(min-width: 1200px) {
+        transform: translate(-270%, -30%);
+    }
+
+    @media(min-width: 1300px) {
+        transform: translate(-285%, -30%);
+    }
+
+    @media(min-width: 1400px) {
+        transform: translate(-300%, -25%) scale(1);
+    }
+   
+
 }
 
 .title {
     margin-top: 35%;
 
+    @media(min-width:41.67em) {
+        margin-top: 25%;
+    }
+
+    @media(min-width: 650px) {
+        margin-top: 20%;
+    }
+
     @media(min-width: 900px) {
         margin-top: 0;
+        place-self: end start;
     }
 }
 
@@ -230,7 +292,7 @@ p {
 }
 
 .question-container::after {
-    margin-top: 1.5em;
+    margin-top: 1em;
     content: "";
     display: block;
     height: 1px;
@@ -240,9 +302,8 @@ p {
 .attribution { 
     font-size: 11px;
     text-align: center;
-
     a { 
-        color: hsl(228, 45%, 44%); 
+        color: white;
     }
 }
 
@@ -253,14 +314,12 @@ p {
 .question-title:hover,
 .question-title:focus {
     cursor: pointer;
+    outline: none;
 
     h2 {
         color: $hoverQuestions;
         pointer-events: none;
     }
-
-    //PARA MOVERLO PONER LA CAJA DENTRO DEL TITLE EN UN @MEDIA DE 900PX. 
-    //ENTONCES LO VOY A PODER MOVER. NO VOY A PODER MOVER EL INFO CONTAINER PERO POR LO MENOS LA CAJA SI 
 }
 
 img.selected {
@@ -274,9 +333,11 @@ p.active {
 }
 
 .box-img.move {
-    left: 4%;
+    margin-left: -4%;
 }
 
 .container.move {
-    margin-right: 5%;
+    @media(min-width: 900px) {
+        margin-right: 5%;
+    }
 }
