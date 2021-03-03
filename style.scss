@@ -1,0 +1,282 @@
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap');
+
+//variables
+$boldColor: hsl(238, 29%, 16%);
+$neutralQuestions: hsl(237, 12%, 33%);
+$neutralAnswers: hsl(240, 6%, 50%);
+$hoverQuestions: hsl(14, 88%, 65%);
+
+
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*===========
+ Base Rulers
+============*/
+
+body {
+    background-image: linear-gradient(to bottom,
+     hsl(273, 75%, 66%),
+     hsl(240, 73%, 65%)
+    );
+    height: 100vh;
+    width: 100%;
+    background-repeat: no-repeat;
+    justify-content: center;
+    align-items: center;
+    font-size: 75%;
+    font-family: "Kumbh Sans";
+
+    @media(min-width: 900px) {
+        background-image: linear-gradient(to right bottom,
+            hsl(273, 75%, 66%),
+            hsl(240, 73%, 65%)
+        );
+    }
+}
+
+img {
+    transform: scale(0.9);
+
+    @media(min-width: 900px) {
+        transform: none;
+    }
+}
+
+h1 {
+    font-size: 2.5em;
+    color: $boldColor;
+}
+
+h2 {
+    font-weight: 400;
+    font-size: 1.1em;
+    color: $neutralQuestions;
+
+    &.selected {
+        font-weight: 700;
+        color: $boldColor;
+    }
+}
+
+p {
+    transition: opacity 0.5s ease-in, height 0.5s ease-in,  margin-top 0.7s ease-out;
+    opacity: 0;
+    height: 0;
+    color: $neutralAnswers;
+    line-height: 1.5em; 
+}
+
+/*=============
+ Funcionalities
+=============*/
+.split {
+    display: flex;
+}
+
+/*=======
+ Layout
+========*/
+
+.container {
+    width: 90%;
+    height: 75%;
+    margin-top: 20%;
+    padding-bottom: 2.5em;
+    background-color: white;
+    border-radius: 5%;
+    box-shadow: 0 15px 15px rgba(0, 0, 0, .2);
+    overflow: auto;
+    flex-direction: column;
+
+    @media(min-width: 900px) {
+        flex-direction: row;
+        width: 70%;
+        height: 55%;
+        margin-top: 0;
+        border-radius: 20px;
+        padding: 0;
+        overflow: hidden;
+        transition: margin-right .3s;
+    }
+}
+
+.img-container {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    @media(min-width: 900px) {
+        position: relative;
+        left: 0;
+        top: 50%;
+        transform: translate(0, -50%);
+    }
+}
+
+.info {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+
+    @media(min-width: 900px) {
+        align-items: flex-start;
+        // justify-content: center;
+        margin: 0 10em;
+        position: relative;
+        padding-top: 10%;
+    }
+}
+
+.questions {
+    margin: 2.5em 3em 0 3em;
+
+    @media(min-width: 900px) {
+        margin: 2.5em 0 0 0;
+    }
+}
+
+/*========
+ Elements
+=========*/
+
+.woman-img-mobile {
+    z-index: 99;
+
+    @media(min-width: 900px) {
+        display: none;
+    }
+}
+
+.woman-img-desktop {
+    display: none;
+    z-index: 99;
+
+    @media(min-width: 900px) {
+        display: block;
+        width: 100%;
+        position: relative;
+        top: 50%;
+        transform: translate(-10%,-50%) scale(1.2);
+    }
+}
+
+.bg-img-mobile {
+    z-index: 98;
+    margin-top: -35%;
+    margin-left: 10%;
+
+    @media(min-width: 900px) {
+        display: none;
+    }
+}
+
+.bg-img-desktop {
+    display: none;
+    z-index: 98;
+
+    @media(min-width: 900px) {
+        display: block;
+        width: 100%;
+        position: relative;
+        top: 50%;
+        transform: translate(-50%,-140%)
+                    scale(2);
+        
+    }
+}
+
+.box-img {
+    display: none;
+    z-index: 99;
+
+    @media(min-width: 900px) {
+        display: inline;
+        width: auto;
+        position: absolute;
+        top: 50%;
+        left: 8.5%;
+        transform: translate(0, -25%);
+        transition: left .3s;
+    }
+}
+
+.title {
+    margin-top: 35%;
+
+    @media(min-width: 900px) {
+        margin-top: 0;
+    }
+}
+
+.question-title {
+    width: 100%;
+    justify-content: space-between;
+
+    img {
+        margin-left: 1em;
+        padding: .5em 0;
+        transition: transform 0.7s ease;
+    }
+}
+
+.question-container {
+    margin-bottom: 1.5em;
+}
+
+.question-container::after {
+    margin-top: 1.5em;
+    content: "";
+    display: block;
+    height: 1px;
+    background-color: hsl(240, 5%, 91%);
+}
+
+.attribution { 
+    font-size: 11px;
+    text-align: center;
+
+    a { 
+        color: hsl(228, 45%, 44%); 
+    }
+}
+
+/*====
+ States
+=====*/
+
+.question-title:hover,
+.question-title:focus {
+    cursor: pointer;
+
+    h2 {
+        color: $hoverQuestions;
+        pointer-events: none;
+    }
+
+    //PARA MOVERLO PONER LA CAJA DENTRO DEL TITLE EN UN @MEDIA DE 900PX. 
+    //ENTONCES LO VOY A PODER MOVER. NO VOY A PODER MOVER EL INFO CONTAINER PERO POR LO MENOS LA CAJA SI 
+}
+
+img.selected {
+    transform: rotate(180deg);
+}
+
+p.active {
+    margin-top: 1em;
+    opacity: 1;
+    height: 100%;
+}
+
+.box-img.move {
+    left: 4%;
+}
+
+.container.move {
+    margin-right: 5%;
+}
