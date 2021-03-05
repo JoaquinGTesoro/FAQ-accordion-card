@@ -12,37 +12,28 @@ let actualQuestion = 1;
  Event listeners
 ================*/
 
-//event listener to open the question when enter is touched over the question
-questionsSelector.forEach(question => question.addEventListener('keypress', function (e){
-    if (e.key === 'Enter') {
-        console.log(question)
-        showAnswer (question.parentElement.classList[1], question);
-    }
-}));
-
-//E.L. to open the question when is clicked
-questionsSelector.forEach(question => {
-    question.addEventListener('click', function show() {
-        showAnswer(question.parentElement.classList[1], question);
-    });
-});
-
-//E.L to move the container and the box when the .info is hover
-document.addEventListener('mousemove', function checkHover() {
-    const hovered = isHover(info);
-    if (hovered !== checkHover.hovered) {
-        checkHover.hovered = hovered;  
-        if (checkHover.hovered == true) {
-            container.classList.toggle("move");
-            boxImg.classList.toggle("move");    
-        } else {
-            if (container.classList.length == 3) {
-                container.classList.toggle("move");
-                boxImg.classList.toggle("move");    
-            }
+questionsSelector.forEach((question, i) => {
+    //event listener to open the question when enter is touched over the question
+    question.addEventListener('keypress', function (e){
+        if (e.key === 'Enter') {
+            console.log(question)
+            showAnswer (i, question);
         }
-    }
-});
+    })
+    //E.L. to open the question when is clicked
+    question.addEventListener('click', () => {
+        showAnswer(i, question);
+    })
+    //E.L to move the container and the box when the title is hover
+    question.addEventListener('mouseenter', () => {
+        container.classList.add("move");
+        boxImg.classList.add("move");
+    })
+    question.addEventListener('mouseleave', () => {
+        container.classList.remove("move");
+        boxImg.classList.remove("move");
+    })    
+})
 
 /*==========
  Functions
@@ -54,13 +45,9 @@ function showAnswer (questionPosition, questionElement) {
     questionsSelector[actualQuestion].children[0].classList.toggle("selected");
     questionsSelector[actualQuestion].children[1].children[0].classList.toggle("selected");
     //Open the new answer
-    answers[questionPosition - 1].classList.toggle("active");
+    answers[questionPosition].classList.toggle("active");
     questionElement.children[0].classList.toggle("selected");
     questionElement.children[1].children[0].classList.toggle("selected");
     //Assign new answer its position
-    actualQuestion = questionPosition - 1;
-
+    actualQuestion = questionPosition;
 }
-
-//Function to check if is hover
-const isHover = e => e.parentElement.querySelector(':hover') === e;
